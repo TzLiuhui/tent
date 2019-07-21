@@ -1,0 +1,43 @@
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: utf-8
+logging:
+  level:
+    com.microcompany.tent.dao: DEBUG
+#  file: log/zb-shiro.log
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/febsshiro?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: LHljdhx0830
+    # 初始化大小，最小，最大
+    initialSize: 1
+    minIdle: 3
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    filters: stat,wall,slf4j
+
+  thymeleaf:
+    cache: false
+#    mode: LEGACYHTML5
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    timeout: 0
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+#mybatis plus
+mybatis-plus:
+  #指明mapper.xml扫描位置(classpath* 代表编译后类文件根目录)
+  mapper-locations: classpath:/mapper/**Mapper.xml
+  #指明实体扫描(多个package用逗号或者分号分隔)
+  typeAliasesPackage: com.microcompany.tent.model

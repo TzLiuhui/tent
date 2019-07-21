@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{/libs/fontawesome-free/css/all.min.css}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" th:href="@{/libs/icheck-bootstrap/icheck-bootstrap.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{libs/adminLTE/css/adminlte.min.css}">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href=""><strong>自来水公司营帐系统</strong></a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+
+      <p>请登录系统</p>
+      <form action="../../index3.html" method="post">
+        <div class="input-group mb-3 ml-3 mr-5">
+          <div class="input-group-prepend ml-3">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input type="email" class="form-control" placeholder="请输入工号">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+          </div>
+          <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+        </div>
+        <div class="input-group mb-3 ">
+          <div class="input-group-prepend input-group-text">
+              <span class="fas fa-lock"></span>
+          </div>
+          <input type="password" class="form-control" placeholder="请输入密码">
+        </div>
+
+        <div class="form-group ">
+          <input type="text" name="username" class="form-control" placeholder="Email" max="14" min="3"
+                 require="必填项" value="admin">
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+
+        <div class="input-group mb-3">
+
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">登 录</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script th:src="@{/libs/jquery/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/libs/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>
