@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg ">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
@@ -48,16 +48,16 @@
     </div>
 </nav>
 
-<div class="login-bg"></div>
+<div class="login-bg d-none d-sm-none d-md-block d-lg-block"></div>
 
 <div class="login-box">
     <!--    <div class="login-logo">-->
     <!--        <a href="../../index2.html"><b>Admin</b>LTE</a>-->
     <!--    </div>-->
     <!-- /.login-logo -->
-    <div class="card">
-        <div class="card-body login-card-body">
-            <p class="login-box-msg">请登录</p>
+    <div class="card" >
+        <div class="card-body login-card-body" style="background-color: #f4f1f1">
+            <p class="login-box-msg text-left text-lg">用户登录</p>
 
             <form action="../../index3.html" method="post">
                 <div class="input-group mb-3">
@@ -102,6 +102,9 @@
     </div>
 </div>
 
+<div class="text-center">
+    <p>Copyright © 2018. nbclass.com All rights reserved.</p>
+</div>
 <!-- jQuery -->
 <script th:src="@{/libs/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->

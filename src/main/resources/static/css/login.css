@@ -10,10 +10,11 @@
     z-index: 2;
     margin-top: 10%;
     margin-right: 15%;
-    top: 0px;
+    /*background-color: #58d1ff;*/
+    top: 30px;
     right: 0px;
-    padding-bottom: 30px;
-    background: #fff;
+    padding-bottom: 0px;
+    /*background: #e7e0ff;*/
     border-radius: 3px;
-    border-color: #e2e2e2;
+    border-color: #717be2;
 }
