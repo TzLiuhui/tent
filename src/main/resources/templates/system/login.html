@@ -17,7 +17,7 @@
     <!--    自定义   -->
     <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
-<body >
+<body>
 
 <nav class="navbar navbar-expand-lg ">
     <div class="container">
@@ -51,9 +51,56 @@
 <div class="login-bg"></div>
 
 <div class="login-box">
+    <!--    <div class="login-logo">-->
+    <!--        <a href="../../index2.html"><b>Admin</b>LTE</a>-->
+    <!--    </div>-->
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">请登录</p>
 
+            <form action="../../index3.html" method="post">
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="工号">
+                    <div class="input-group-append input-group-text">
+                        <span class="fas fa-user"></span>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="密码">
+                    <div class="input-group-append input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3 col-6">
+                        <input type="password" class="form-control" placeholder="验证码">
+                        <div class="input-group-append input-group-text">
+                            <span class="fas fa-key"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">
+                                记住我
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-flat  ">登 录</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+        </div>
+        <!-- /.login-card-body -->
+    </div>
 </div>
-<!-- /.login-box -->
 
 <!-- jQuery -->
 <script th:src="@{/libs/jquery/jquery.min.js}"></script>
