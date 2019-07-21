@@ -22,7 +22,7 @@
 <nav class="navbar navbar-expand-lg ">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img th:src="@{/img/AdminLTELogo.png}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+            <img src="/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,70 +48,10 @@
     </div>
 </nav>
 
-<img th:src="@{/img/login-bg.jpg}" alt="AdminLTE Logo"  height="750" width="1920">
-
-<!--<img src="/img/login-bg.jpg">-->
-<!--<img th:src="@{/img/login-bg.jpg}" height="750" width="1920"/>-->
+<div class="login-bg"></div>
 
 <div class="login-box">
-    <div class="login-logo">
-        <a href=""><strong>自来水公司营帐系统</strong></a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="card">
-        <div class="card-body login-card-body">
 
-            <p>请登录系统</p>
-            <form action="../../index3.html" method="post">
-                <div class="input-group mb-3 ml-3 mr-5">
-                    <div class="input-group-prepend ml-3">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input type="email" class="form-control" placeholder="请输入工号">
-                </div>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                    </div>
-                    <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend input-group-text">
-                        <span class="fas fa-lock"></span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="请输入密码">
-                </div>
-
-                <div class="form-group ">
-                    <input type="text" name="username" class="form-control" placeholder="Email" max="14" min="3"
-                           require="必填项" value="admin">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
-
-                <div class="input-group mb-3">
-
-                </div>
-                <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">
-                                Remember Me
-                            </label>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">登 录</button>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            </form>
-
-
-        </div>
-        <!-- /.login-card-body -->
-    </div>
 </div>
 <!-- /.login-box -->
 

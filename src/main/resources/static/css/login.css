@@ -4,3 +4,16 @@
     height: 750px;
     top: 0px;
 }
+
+.login-box {
+    position: absolute;
+    z-index: 2;
+    margin-top: 8%;
+    margin-right: 15%;
+    top: 0px;
+    right: 0px;
+    padding-bottom: 30px;
+    background: #fff;
+    border-radius: 3px;
+    border-color: #e2e2e2;
+}
