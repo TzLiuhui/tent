@@ -21,9 +21,9 @@ public class KaptchaConfig {
         properties.setProperty("kaptcha.border", "no");
         properties.setProperty("kaptcha.border.color", "105,179,90");
         properties.setProperty("kaptcha.textproducer.font.color", "black");
-        properties.setProperty("kaptcha.img.width", "125");
+        properties.setProperty("kaptcha.img.width", "200");
         properties.setProperty("kaptcha.img.height", "45");
-        properties.setProperty("kaptcha.textproducer.font.size", "35");
+        properties.setProperty("kaptcha.textproducer.font.size", "36");
         properties.setProperty("kaptcha.textproducer.char.length", "4");
         properties.setProperty("kaptcha.textproducer.font.names", "宋体,楷体,微软雅黑");  
         Config config = new Config(properties);  

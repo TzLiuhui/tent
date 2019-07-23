@@ -55,7 +55,7 @@
     <!--        <a href="../../index2.html"><b>Admin</b>LTE</a>-->
     <!--    </div>-->
     <!-- /.login-logo -->
-    <div class="card" >
+    <div class="card">
         <div class="card-body login-card-body" style="background-color: #f4f1f1">
             <p class="login-box-msg text-left text-lg">用户登录</p>
 
@@ -79,6 +79,9 @@
                             <span class="fas fa-key"></span>
                         </div>
                     </div>
+                    <div class="col-6">
+                        <img src="/verificationCode" class="vcode-img">
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-8">
@@ -91,7 +94,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-flat  ">登 录</button>
+                        <button type="button" id="loginBtn" class="btn btn-primary btn-flat  ">登 录</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -102,13 +105,30 @@
     </div>
 </div>
 
-<div class="text-center">
+<div class="text-center d-none d-sm-none d-md-block d-lg-block">
     <p>Copyright © 2018. nbclass.com All rights reserved.</p>
 </div>
 <!-- jQuery -->
 <script th:src="@{/libs/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->
 <script th:src="@{/libs/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script>
+    $(function () {
+        $(".vcode-img").on('click', function () {
+//            var url = '/Creditgt.jpg?d='+Math.random();
+//            $(this).attr('src',url);
+            $(this).attr('src', '/verificationCode?' + Math.floor(Math.random() * 100));
+        });
+        $("#loginBtn").on('click', function () {
+            window.location.href = "/index";
+        });
 
+        $(document).keyup(function (event) {
+            if (event.keyCode == 13) {
+                $("#loginBtn").click();
+            }
+        });
+    })
+</script>
 </body>
 </html>
