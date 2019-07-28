@@ -27,8 +27,8 @@ var Core = (function () {
         $("#content_" + id).remove();
     };
     core.activeTab = function (id) {
-        $("#tabs a.active").removeClass("active");
-        $("#content div.active").removeClass("active");
+        $("#tabs a").filter(".active").removeClass("active");
+        $("#content div").filter(".active").removeClass("active");
         $("#content_" + id).addClass("active");
         $("#tabs a[href='#content_" + id + "']").addClass("active")
     };
@@ -45,7 +45,7 @@ var Core = (function () {
 
 $(function () {
     // 定义tab的关闭功能
-    $("#tabs").on("click", "[tabclose]", function (e) {
+    $("#tabs .fa-times").on("click", function (e) {
         var id = $(this).attr("tabclose");
         Core.removeTab(id);
     });
