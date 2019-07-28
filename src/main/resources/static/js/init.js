@@ -8,7 +8,7 @@ $(function () {
      */
     var opts = {};
     // 定义菜单单击功能
-    $(".sidebar  a").click(function () {
+    $(".sidebar a").click(function () {
         // 本菜单没有URL，则直接跳出。方便了没有一级菜单（没有子菜单）的也可以有直接的功能调用
         if ($(this).attr("href") == "#") {
             return
@@ -21,7 +21,12 @@ $(function () {
             // 去掉原菜单的激活状态，激活本菜单和一级菜单
             $(".sidebar a.active").removeClass("active");
             $(this).addClass("active");
-            $(this).parent().parent().parent().find("a").first().addClass("active");
+            //应有判断是否 li 元素，如是则激活，不是什么不做
+            if ($(this).parent().parent().parent().hasClass("mt-2")) {
+                return;
+            } else {
+                $(this).parent().parent().parent().find("a").first().addClass("active");
+            }
         }
 
         //获得功能图标，处理其它的 Class
@@ -33,7 +38,7 @@ $(function () {
         opts.id = $(this).attr("id");
         //获得功能的url，主要去掉加上的 #
         var aHref = $(this).attr("href");
-        opts.url=aHref.substring(1, aHref.length);
+        opts.url = aHref.substring(1, aHref.length);
         //加载 功能模块
         Core.load(opts);
     });

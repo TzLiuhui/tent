@@ -13,6 +13,7 @@
     <link rel="stylesheet" th:href="@{/libs/icheck-bootstrap/icheck-bootstrap.min.css}">
     <!-- Theme style -->
     <link rel="stylesheet" th:href="@{/libs/adminLTE/css/adminlte.min.css}">
+    <link rel="stylesheet" th:href="@{/css/core-tab.css}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -191,7 +192,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active" id="">
+                        <a href="#" class="nav-link" >
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 用户管理
@@ -199,13 +200,13 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#user" class="nav-link active" id="addUser">
+                            <li class="nav-item" id="menu_addUser">
+                                <a href="#user" class="nav-link" id="addUser">
                                     <i class="fas fa-key nav-icon ml-3"></i>
                                     <p>新增用户</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item"  id="menu_updateUser">
                                 <a href="#sy" class="nav-link" id="updateUser">
                                     <i class="fas fa-user nav-icon ml-3"></i>
                                     <p>修改用户</p>
@@ -214,7 +215,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#dd" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="fas fa-th nav-icon "></i>
                             <p>Simple Link <span class="right badge badge-danger">New</span>
                             </p>
@@ -230,14 +231,14 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#dd" class="nav-link ">
-                                    <i class="far fa-circle nav-icon"></i>
+                                <a href="#" class="nav-link ">
+                                    <i class="far fa-circle nav-icon ml-3"></i>
                                     <p>新增权限</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#dd" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon ml-3"></i>
                                     <p>修改权限</p>
                                 </a>
                             </li>
@@ -251,93 +252,17 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" id="contentId">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Starter Page</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+    <div class="content-wrapper">
+        <div class="container-fluid mt-1">
+            <ul class="nav nav-pills" id="tabs">
+                <li class="nav-item" id="tab_tab1"> <a href="#content_tab1" class="nav-link active" data-toggle="tab"><i class="fa fa-home mr-0 "></i> 首页 </a></li>
+<!--                <li class="nav-item"><a href="#tab2" class="nav-link " data-toggle="tab">Article <i class="fa fa-times ml-2 " tabclose="dd"></i></a></li>-->
+            </ul>
+
+            <div class="tab-content" id="content">
+                <div class="tab-pane active" id="content_tab1">111</div>
+            </div>
         </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-
-                                <p class="card-text">
-                                    Some quick example text to build on the card title and make up the bulk of the
-                                    card's
-                                    content.
-                                </p>
-
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-
-                        <div class="card card-primary card-outline">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-
-                                <p class="card-text">
-                                    Some quick example text to build on the card title and make up the bulk of the
-                                    card's
-                                    content.
-                                </p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div><!-- /.card -->
-                    </div>
-                    <!-- /.col-md-6 -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="m-0">Featured</h5>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-title">Special title treatment</h6>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                        <div class="card card-primary card-outline">
-                            <div class="card-header">
-                                <h5 class="m-0">Featured</h5>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-title">Special title treatment</h6>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col-md-6 -->
-                </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
