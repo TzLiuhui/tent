@@ -5,7 +5,7 @@ var Core = (function () {
         $("#content div").filter(".active").removeClass("active");
 
         //增加tab，显示图标、标题、关闭
-        var tab_html = '<li class="nav-item" id="tab_' + opts.id + '"><a href="#content_' + opts.id + '" class="nav-link active" data-toggle="tab"> ';
+        var tab_html = '<li class="nav-item border " id="tab_' + opts.id + '"><a href="#content_' + opts.id + '" class="nav-link active" data-toggle="tab"> ';
         tab_html += '<i class="' + opts.icon + '"></i>  ' + opts.title + '<i class="fa fa-times ml-2 " tabclose="' + opts.id + '"></i></a></li>';
         $("#tabs").append(tab_html);
 
@@ -20,7 +20,6 @@ var Core = (function () {
         if ($(ahref).hasClass("active")) {
             var prev_id = $("#tab_" + id).prev().attr("id");
             prev_id = prev_id.substring(4, prev_id.length);
-            console.log(prev_id);
             this.activeTab(prev_id);
         }
         //关闭TAB
@@ -35,7 +34,6 @@ var Core = (function () {
     };
 
     core.load = function (opts) {
-        console.log(opts);
         if ($("#tab_" + opts.id)[0]) {
             this.activeTab(opts.id)
         } else {
