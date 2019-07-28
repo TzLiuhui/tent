@@ -20,6 +20,6 @@ public class RenderController {
 
     @GetMapping("/index")
     public String index() {
-        return "index/index";
+        return "index/index-tab";
     }
 }
