@@ -5,7 +5,7 @@ var Core = (function () {
         $("#content div.active").removeClass("active");
 
         //增加tab，显示图标、标题、关闭
-        var tab_html = '<li class="nav-item border "><a href="#content_' + opts.id + '" class="nav-link active" data-toggle="tab"> ';
+        var tab_html = '<li class="nav-item border " id="tab_' + opts.id + '"><a href="#content_' + opts.id + '" class="nav-link active" data-toggle="tab"> ';
         tab_html += '<i class="' + opts.icon + '"></i>  ' + opts.title + '<i class="fa fa-times ml-2 " tabclose="' + opts.id + '"></i></a></li>';
         $("#tabs").append(tab_html);
 
@@ -13,27 +13,29 @@ var Core = (function () {
         $("#content").append('<div class="tab-pane active" id="content_' + opts.id + '"></div>');
         $("#content_" + opts.id).load(opts.url);
     };
+
     core.removeTab = function (id) {
         //如果关闭的是当前激活tab，则激活前一个tab
         var ahref = $("#tabs a[href='#content_" + id + "']");
 
         if ($(ahref).hasClass("active")) {
-            ahref.parent().prev().children("a").trigger("click");
+            var prev_id = $("#tab_" + id).prev().attr("id");
+            prev_id = prev_id.substring(4, prev_id.length);
+            this.activeTab(prev_id);
         }
         //关闭TAB
-        ahref.parent().remove();
-        // $("#tab_" + id).remove();
+        $("#tab_" + id).remove();
         $("#content_" + id).remove();
     };
     core.activeTab = function (id) {
-
-        var ahref = $("#tabs a[href='#content_" + id + "']");
-
-        ahref.trigger("click");
+        $("#tabs a.active").removeClass("active");
+        $("#content div.active").removeClass("active");
+        $("#content_" + id).addClass("active");
+        $("#tabs a[href='#content_" + id + "']").addClass("active")
     };
 
     core.load = function (opts) {
-        if ($("#tabs i[tabclose='" + opts.id + "']")[0]) {
+        if ($("#tab_" + opts.id)[0]) {
             this.activeTab(opts.id)
         } else {
             this.addTab(opts)
