@@ -5,8 +5,8 @@ var Core = (function () {
         $("#content div.active").removeClass("active");
 
         //增加tab，显示图标、标题、关闭
-        var tab_html = '<li class="nav-item border "><a href="#content_' + opts.id + '" class="nav-link active" data-toggle="tab"> ';
-        tab_html += '<i class="' + opts.icon + '"></i>  ' + opts.title + '<i class="fa fa-times ml-2 " tabclose="' + opts.id + '"></i></a></li>';
+        var tab_html = '<li class="nav-item border "><a href="#content_' + opts.id + '" class="nav-link active" data-toggle="tab" id="tab_' + opts.id + '">';
+        tab_html += '<i class="' + opts.icon + ' mr-1"></i>' + opts.title + '<i class="fa fa-times ml-2 " ></i></a></li>';
         $("#tabs").append(tab_html);
 
         //加载 功能页面
@@ -15,25 +15,22 @@ var Core = (function () {
     };
     core.removeTab = function (id) {
         //如果关闭的是当前激活tab，则激活前一个tab
-        var ahref = $("#tabs a[href='#content_" + id + "']");
-
-        if ($(ahref).hasClass("active")) {
-            ahref.parent().prev().children("a").trigger("click");
+        if ($("#tab_" + id).hasClass("active")) {
+            $("#tab_" + id).parent().prev().children("a").trigger("click");
         }
         //关闭TAB
-        ahref.parent().remove();
-        // $("#tab_" + id).remove();
+        $("#tab_" + id).parent().remove();
         $("#content_" + id).remove();
     };
     core.activeTab = function (id) {
-
-        var ahref = $("#tabs a[href='#content_" + id + "']");
-
-        ahref.trigger("click");
+        if ($("#tab_" + id).hasClass("active")) {
+            return
+        }
+        $("#tab_" + id).trigger("click");
     };
 
     core.load = function (opts) {
-        if ($("#tabs i[tabclose='" + opts.id + "']")[0]) {
+        if (document.getElementById("tab_" + opts.id)) {
             this.activeTab(opts.id)
         } else {
             this.addTab(opts)
@@ -44,8 +41,8 @@ var Core = (function () {
 
 $(function () {
     // 定义tab的关闭功能
-    $("#tabs").on("click", "[tabclose]", function (e) {
-        var id = $(this).attr("tabclose");
+    $(document).on("click", "#tabs i.fa-times", function () {
+        var id = $(this).parent().attr("id").substring(4);
         Core.removeTab(id);
     });
 });
