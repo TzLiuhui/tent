@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-User Page
-</body>
-</html>
+<div class="content">
+    <div class="container-fluid">
+
+        <div id="toolbar">
+            <button id="btn_add" type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">
+                <span class="fas fa-inbox" aria-hidden="true"></span>新增
+            </button>
+                <button id="btn_batch_delete" type="button" class="btn btn-danger">
+                    <span class="fas fa-remove" aria-hidden="true"></span>批量删除
+                </button>
+        </div>
+        <table id="realTime_Table" data-click-to-select="true" class="table table-bordered table-hover table-striped"
+               data-page-size="20"
+               data-url="/permission/list">
+            <thead class="table-success">
+            <tr>
+                <th data-checkbox="true"></th>
+                <th data-sortable="true" data-field="id">编号</th>
+                <th data-sortable="true" data-field="name" >标题</th>
+                <th data-sortable="true" data-field="url" data-align="center">链接</th>
+                <th data-sortable="true" data-field="description">简述</th>
+                <th data-sortable="true" data-field="perms">权限</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div><!-- /.container-fluid -->
+</div>
+<script>
+    $("#realTime_Table").bootstrapTable({
+        toolbar:'#toolbar',
+        search: false,
+        pagination: true,
+        pageSize: 15,
+        pageList: [5, 10, 15, 20],
+        showColumns: true,
+        showRefresh: true,
+        showToggle: true,
+        locale: "zh-CN",
+        striped: true,
+        onDblClickRow: function (row) {
+            alert("click:" + row.id)
+        }
+    });
+</script>
