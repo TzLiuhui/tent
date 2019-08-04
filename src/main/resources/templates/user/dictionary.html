@@ -1,0 +1,33 @@
+<div class="content">
+    <div class="container-fluid">
+
+        <div id="toolbar">
+            <button id="btn_add" type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">
+                <span class="fas fa-inbox" aria-hidden="true"></span>新增
+            </button>
+            <button id="btn_batch_delete" type="button" class="btn btn-danger">
+                <span class="fas fa-remove" aria-hidden="true"></span>批量删除
+            </button>
+        </div>
+        <table id="realTime_Table">
+
+        </table>
+    </div><!-- /.container-fluid -->
+</div>
+<script>
+    $("#realTime_Table").bootstrapTable({
+        toolbar:'#toolbar',
+        search: false,
+        pagination: true,
+        pageSize: 15,
+        pageList: [5, 10, 15, 20],
+        showColumns: true,
+        showRefresh: true,
+        showToggle: true,
+        locale: "zh-CN",
+        striped: true,
+        onDblClickRow: function (row) {
+            alert("click:" + row.id)
+        }
+    });
+</script>
