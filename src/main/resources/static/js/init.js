@@ -88,10 +88,10 @@ $(function () {
         //获得功能编号
         opts.id = $(this).attr("id").substring(5);
         //获得功能的url，主要去掉加上的 #
-        var aHref = $(this).attr("href");
-        opts.url = aHref.substring(1);
+        var url = $(this).attr("href");
+        opts.url = url.substring(1);
         //加载 功能模块
-        Core.load(opts);
+        TabCore.load(opts);
     });
 });
 
