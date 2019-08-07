@@ -80,6 +80,30 @@ var FormCore = (function () {
             onLoadSuccess: tableOptions.onLoadSuccess
         });
     };
+    /*ajax请求*/
+    formCore.load = function (id, url, dataToPost, d, type, async) {
+        $.ajax({
+            url: url,
+            cache: false,
+            async: async == undefined ? true : async,
+            data: dataToPost,
+            type: type == undefined ? "POST" : type,
+            success: function (data) {
+                if (typeof d == "function") {
+                    d(data);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 403) {
+                    layer.msg("您没有权限访问，请联系管理员！")
+                } else if (XMLHttpRequest.status == 500) {
+                    layer.msg("服务器内部错误！")
+                } else {
+                    layer.msg("服务器未知错误！")
+                }
+            }
+        });
+    };
     return formCore;
 })
 (FormCore, window);
