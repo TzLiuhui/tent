@@ -32,7 +32,7 @@ var FormCore = (function () {
         cardView: false, //是否显示详细视图
         detailView: false, //是否显示父子表
         showExport: true, //是否显示导出
-        exportDataType: "basic", //basic', 'all', 'selected'.
+        exportDataType: "all", //basic', 'all', 'selected'.
         escape: true,//html转意
         // onLoadSuccess: tableLoadSuccess
     };
@@ -45,7 +45,7 @@ var FormCore = (function () {
             contentType: tableOptions.contentType, //用post请求，这个是必须条件，必须加上，get可以不用，亲测
             dataType: tableOptions.dataType,
             method: tableOptions.method, //请求方式（*）
-            //            toolbar: '#toolbar',        //工具按钮用哪个容器
+            toolbar: tableOptions.toolbar,        //工具按钮用哪个容器
             undefinedText: tableOptions.undefinedText, /*为undefiend时显示的字*/
             striped: tableOptions.striped, //是否显示行间隔色
             cache: tableOptions.cache, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -53,9 +53,8 @@ var FormCore = (function () {
             sortable: tableOptions.sortable, //是否启用排序
             sortOrder: tableOptions.sortOrder, //排序方式
             sortName: tableOptions.sortName, //排序方式
-            toolbar: tableOptions.toolbar,
-            //            search: true,             //是否使用客户端搜索
-            queryParams: tableOptions.queryParams,//传递参数（*）
+            // search: true,             //是否使用客户端搜索
+            // queryParams: tableOptions.queryParams,//传递参数（*）
             responseHandler: tableOptions.responseHandler,
             queryParamsType: tableOptions.queryParamsType,
             sidePagination: tableOptions.sidePagination, //分页方式：client客户端分页，server服务端分页（*）
@@ -89,26 +88,26 @@ var FormCore = (function () {
             $(id).bootstrapTable("refresh");
         }
     };
-    formCore.selectSingleData = function (id){
+    formCore.selectSingleData = function (id) {
         var selectContent = $(id).bootstrapTable('getSelections');
-        if(typeof(selectContent) == 'undefined' || selectContent == "") {
-            Utils.showMessage("请先选择一条数据!",{icon:0});
+        if (typeof (selectContent) == 'undefined' || selectContent == "") {
+            Utils.showMessage("请先选择一条数据!", {icon: 0});
             return false;
-        }else if(selectContent.length > 1){
-            Utils.showMessage("只能选择一条数据!",{icon:5});
+        } else if (selectContent.length > 1) {
+            Utils.showMessage("只能选择一条数据!", {icon: 5});
             return false;
-        }else{
+        } else {
             var selectData = selectContent[0];
             return selectData;
         }
     };
 
-    formCore.selectMutiData = function (id){
-        var checkedRows= $(id).bootstrapTable('getSelections');
-        if(checkedRows.length==0){
-            Utils.showMessage("请先选择一条数据！",{icon: 0});
+    formCore.selectMutiData = function (id) {
+        var checkedRows = $(id).bootstrapTable('getSelections');
+        if (checkedRows.length == 0) {
+            Utils.showMessage("请先选择一条数据！", {icon: 0});
             return false;
-        }else{
+        } else {
             return checkedRows;
         }
     };
@@ -128,11 +127,11 @@ var FormCore = (function () {
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 if (XMLHttpRequest.status == 403) {
-                    Utils.showMessage("您没有权限访问，请联系管理员！",{icon:5})
+                    Utils.showMessage("您没有权限访问，请联系管理员！", {icon: 5})
                 } else if (XMLHttpRequest.status == 500) {
-                    Utils.showMessage("服务器内部错误！",{icon:1,shift:6})
+                    Utils.showMessage("服务器内部错误！", {icon: 1, shift: 6})
                 } else {
-                    Utils.showMessage("服务器未知错误！",{icon:1,shift:6})
+                    Utils.showMessage("服务器未知错误！", {icon: 1, shift: 6})
                 }
             }
         });

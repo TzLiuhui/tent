@@ -8,7 +8,6 @@ var Utils = (function () {
             title: "系统提示",
             skin: 'layui-layer-lan',
             btn: ['确认', '取消'],
-            btnClass: ['btn btn-primary', 'btn btn-danger'],
         }, function (index) {
             layer.close(index);
             fun(true);
