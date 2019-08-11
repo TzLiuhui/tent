@@ -48,9 +48,44 @@
     });
     $("#btn-toast").on("click", function () {
         // alert("sdf")
-        // $("#ts-toast").toast("show",)
-
-        layer.msg("保存成功", {time: 3000, icon: 5, shift: 6}, function () {
-        })
+        $("#ts-toast").toast("show")
+        // Utils.showMessage("保存成功！",{shift:0});
+        // layer.msg("保存成功", {
+        //         title: "系统信息",
+        //         time: 3000,
+        //         icon: 1,
+        //         shift: 5,
+        //         skin: 'layui-layer-lan'
+        //     },
+        //
+        //     function () {
+        //     }
+        // )
+        // layer.msg("a;lsdgj;las'gj",{time:2000,kin:'layui-layer-lan',btnclass: ['btn btn-primary', 'btn btn-danger'],});
+        // layer.open({
+        //     content: 'test',
+        //     time:3000,//content可以是字符串，可以是DOM，也可以是一个URL
+        //     // skin:'layui-layer-lan',
+        // btnclass: ['btn btn-primary', 'btn btn-danger']
+        //     , btn: ['按钮一', '按钮二']
+        //     , yes: function (index, layero) {
+        //         //按钮【按钮一】的回调
+        //     }
+        //     , btn2: function (index, layero) {
+        //         //按钮【按钮二】的回调
+        //
+        //         return false //开启该代码可禁止点击该按钮关闭
+        //     }
+        //     // , btn3: function (index, layero) {
+        //     //     //按钮【按钮三】的回调
+        //     //
+        //     //     //return false 开启该代码可禁止点击该按钮关闭
+        //     // }
+        //     , cancel: function () {
+        //         //右上角关闭回调
+        //
+        //         //return false 开启该代码可禁止点击该按钮关闭
+        //     }
+        // })
     })
 </script>

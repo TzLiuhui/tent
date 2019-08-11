@@ -44,9 +44,10 @@
             FormCore.postAjax("/dictionary/save", $("#modify-dict-form").serialize(), function (data) {
                 if (data.status == 200) {
                     $("#modify-dict-modal").modal("hide");
-                    layer.msg(data.msg);
+                    FormCore.refreshTable('#dict-list-table');
+                    Utils.showMessage(data.msg);
                 } else {
-                    layer.msg(data.msg);
+                    Utils.showMessage(data.msg);
                 }
             })
         });

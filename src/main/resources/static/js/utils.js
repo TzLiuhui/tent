@@ -1,19 +1,29 @@
 var Utils = (function () {
 
-    var utils={}
+    var utils={};
     /*询问框*/
-    utils.confirm = function (content, d) {
+    utils.confirm = function (content, fun) {
         layer.confirm(content, {
             icon: 3,
             title: "系统提示",
+            skin: 'layui-layer-lan',
             btn: ['确认', '取消'],
-            btnclass: ['btn btn-primary', 'btn btn-danger'],
+            btnClass: ['btn btn-primary', 'btn btn-danger'],
         }, function (index) {
             layer.close(index);
-            d(true);
+            fun(true);
         });
     };
-
-    return Utils;
+    utils.showMessage = function (content,optis) {
+        var layerOptis=$.extend({},{
+                title: "系统信息",
+                time: 1000,
+                icon: 6,
+                shift: 0,
+                skin: 'layui-layer-lan'},
+            optis);
+        layer.msg(content, layerOptis);
+    };
+    return utils;
 })
 (Utils, window);

@@ -10,8 +10,8 @@
                 <i class="fas fa-trash-alt mr-1" aria-hidden="true"></i>批量删除
             </button>
         </div>
-        <table id="dict-list-table">
-
+        <table id="dict-list-table" class="table-striped">
+            <thead class="table-success">
         </table>
 
         <!--        <div id="openDictionaryDetail">-->
@@ -114,29 +114,29 @@
         FormCore.postAjax("/dictionary/save", $("#add-dict-form").serialize(), function (data) {
             if (data.status == 200) {
                 $("#add-dict-modal").modal("hide");
-                layer.msg(data.msg);
+                FormCore.refreshTable("#dict-list-table");
+                Utils.showMessage(data.msg);
             } else {
-                layer.msg(data.msg);
+                Utils.showMessage(data.msg);
             }
         })
     });
 
     /*批量删除*/
-    $("#dict-btn-batch-delete").click(function(){
-        alert("Asdgfas");
-        var checkedRows= FormCore.selectMutiData("#dict-list-table");
-        if(checkedRows){
-            Utils.confirm("确定删除选中的"+checkedRows.length+"条记录？",function () {
+    $("#dict-btn-batch-delete").click(function () {
+        var checkedRows = FormCore.selectMutiData("#dict-list-table");
+        if (checkedRows) {
+            Utils.confirm("确定删除选中的" + checkedRows.length + "条记录？", function () {
                 dictIdStr = "";
                 $.each(checkedRows, function (i, item) {
-                    dictIdStr += (item.dictIdStr + ",");
+                    dictIdStr += (item.id + ",");
                 });
                 dictIdStr = dictIdStr.substring(0, dictIdStr.length - 1);
-                FormCore.postAjax("/user/batch/delete", {"dictIdStr": dictIdStr}, function (data) {
+                FormCore.postAjax("/dictionary/batch/delete", {"dictIdStr": dictIdStr}, function (data) {
                     if (data.status == 200) {
                         FormCore.refreshTable("#dict-list-table");
+                        Utils.showMessage(data.msg);
                     }
-                    layer.msg(data.msg);
                 }, "get")
             })
         }

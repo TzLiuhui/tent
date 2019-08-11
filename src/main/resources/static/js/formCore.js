@@ -84,18 +84,18 @@ var FormCore = (function () {
     /*刷新表格 ：flag-是否跳转到当前页。默认首页*/
     formCore.refreshTable = function (id, flag) {
         if (flag) {
-            $(id).bootstrapTable("refresh");
-        } else {
             $(id).bootstrapTable("refresh", {"pageNumber": 1});
+        } else {
+            $(id).bootstrapTable("refresh");
         }
-    }
+    };
     formCore.selectSingleData = function (id){
         var selectContent = $(id).bootstrapTable('getSelections');
         if(typeof(selectContent) == 'undefined' || selectContent == "") {
-            layer.msg("请先选择一条数据!");
+            Utils.showMessage("请先选择一条数据!",{icon:0});
             return false;
         }else if(selectContent.length > 1){
-            layer.msg("只能选择一条数据!");
+            Utils.showMessage("只能选择一条数据!",{icon:5});
             return false;
         }else{
             var selectData = selectContent[0];
@@ -106,7 +106,7 @@ var FormCore = (function () {
     formCore.selectMutiData = function (id){
         var checkedRows= $(id).bootstrapTable('getSelections');
         if(checkedRows.length==0){
-            layer.msg("请先选择一条数据！");
+            Utils.showMessage("请先选择一条数据！",{icon: 0});
             return false;
         }else{
             return checkedRows;
@@ -128,11 +128,11 @@ var FormCore = (function () {
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 if (XMLHttpRequest.status == 403) {
-                    layer.msg("您没有权限访问，请联系管理员！")
+                    Utils.showMessage("您没有权限访问，请联系管理员！",{icon:5})
                 } else if (XMLHttpRequest.status == 500) {
-                    layer.msg("服务器内部错误！")
+                    Utils.showMessage("服务器内部错误！",{icon:1,shift:6})
                 } else {
-                    layer.msg("服务器未知错误！")
+                    Utils.showMessage("服务器未知错误！",{icon:1,shift:6})
                 }
             }
         });
