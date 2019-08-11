@@ -1,24 +1,71 @@
 <div class="content">
     <div class="container-fluid">
 
-        <div id="dict_toolbar">
-            <button id="dict_btn_add" type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#dictionaryDetail">
-                <span class="fas fa-inbox" aria-hidden="true"></span>新增
+        <div id="dict-toolbar">
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#add-dict-modal">
+                <i class="fas fa-plus-circle mr-1" aria-hidden="true"></i>新增
             </button>
-            <button id="dict_btn_batch_delete" type="button" class="btn btn-danger">
-                <span class="fas fa-remove" aria-hidden="true"></span>批量删除
+            <button id="dict-btn-batch-delete" type="button" class="btn btn-danger">
+                <i class="fas fa-trash-alt mr-1" aria-hidden="true"></i>批量删除
             </button>
         </div>
-        <table id="dict_list">
+        <table id="dict-list-table">
 
         </table>
 
         <!--        <div id="openDictionaryDetail">-->
-        <div class="modal fade" id="dictionaryDetail" tabindex="-1" role="dialog"
+        <div class="modal fade" id="add-dict-modal" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" id="openDictWindow">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title">新增字典</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="add-dict-form">
+                            <div class="form-group">
+                                <label for="add-dict-input-id">编号</label>
+                                <input type="text" class="form-control" id="add-dict-input-id"
+                                       name="id" placeholder="请输入编号">
+                            </div>
+                            <div class="form-group">
+                                <label for="add-dict-input-caption">标题</label>
+                                <input type="text" class="form-control" id="add-dict-input-caption"
+                                       name="caption" placeholder="请输入标题">
+                            </div>
+                            <div class="form-group">
+                                <label for="add-dict-input-category">分类</label>
+                                <input type="text" class="form-control" id="add-dict-input-category"
+                                       name="category" placeholder="请输入具体的分类">
+                            </div>
+                            <div class="form-group">
+                                <label for="add-dict-input-value">数值</label>
+                                <input type="text" class="form-control" id="add-dict-input-value"
+                                       name="value" placeholder="请输入数值">
+                            </div>
+                            <div class="form-group">
+                                <label for="add-dict-input-description">简介</label>
+                                <input type="text" class="form-control" id="add-dict-input-description"
+                                       name="description" placeholder="请描述一下作用">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="add-dict-btn-save">保存</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modify-dict-modal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" id="open-modify-dict-modal">
                 </div>
             </div>
         </div>
@@ -41,7 +88,7 @@
             align: "center",
         }, {
             field: 'value',
-            title: '用户状态',
+            title: '数值',
             align: "center",
         }, {
             field: 'description',
@@ -50,16 +97,48 @@
         }];
 
     var optis = {
-        id: "#dict_list",
-        toolbar: '#dict_toolbar',
+        id: "#dict-list-table",
+        toolbar: '#dict-toolbar',
         url: "/dictionary/list",
         columns: columns,
         method: 'get'
     };
     FormCore.initTable(optis);
 
-    $("#dict_list").on("dbl-click-row.bs.table", function (e, row) {
-        $("#openDictWindow").load("/dictionary/getOne?id="+row.id);
-        $("#dictionaryDetail").modal();
-    })
+    $("#dict-list-table").on("dbl-click-row.bs.table", function (e, row) {
+        $("#open-modify-dict-modal").load("/dictionary/getById?id=" + row.id);
+        $("#modify-dict-modal").modal();
+    });
+
+    $("#add-dict-btn-save").on('click', function () {
+        FormCore.postAjax("/dictionary/save", $("#add-dict-form").serialize(), function (data) {
+            if (data.status == 200) {
+                $("#add-dict-modal").modal("hide");
+                layer.msg(data.msg);
+            } else {
+                layer.msg(data.msg);
+            }
+        })
+    });
+
+    /*批量删除*/
+    $("#dict-btn-batch-delete").click(function(){
+        alert("Asdgfas");
+        var checkedRows= FormCore.selectMutiData("#dict-list-table");
+        if(checkedRows){
+            Utils.confirm("确定删除选中的"+checkedRows.length+"条记录？",function () {
+                dictIdStr = "";
+                $.each(checkedRows, function (i, item) {
+                    dictIdStr += (item.dictIdStr + ",");
+                });
+                dictIdStr = dictIdStr.substring(0, dictIdStr.length - 1);
+                FormCore.postAjax("/user/batch/delete", {"dictIdStr": dictIdStr}, function (data) {
+                    if (data.status == 200) {
+                        FormCore.refreshTable("#dict-list-table");
+                    }
+                    layer.msg(data.msg);
+                }, "get")
+            })
+        }
+    });
 </script>

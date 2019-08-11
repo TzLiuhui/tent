@@ -5,9 +5,12 @@
             <button id="btn_add" type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">
                 <span class="fas fa-inbox" aria-hidden="true"></span>新增
             </button>
-                <button id="btn_batch_delete" type="button" class="btn btn-danger">
-                    <span class="fas fa-remove" aria-hidden="true"></span>批量删除
-                </button>
+            <button id="btn_batch_delete" type="button" class="btn btn-danger">
+                <span class="fas fa-remove" aria-hidden="true"></span>批量删除
+            </button>
+            <button id="btn-toast" type="button" class="btn btn-danger">
+                <span class="fas fa-remove" aria-hidden="true"></span>试验
+            </button>
         </div>
         <table id="realTime_Table" data-click-to-select="true" class="table table-bordered table-hover table-striped"
                data-page-size="20"
@@ -16,7 +19,7 @@
             <tr>
                 <th data-checkbox="true"></th>
                 <th data-sortable="true" data-field="id">编号</th>
-                <th data-sortable="true" data-field="name" >标题</th>
+                <th data-sortable="true" data-field="name">标题</th>
                 <th data-sortable="true" data-field="url" data-align="center">链接</th>
                 <th data-sortable="true" data-field="description">简述</th>
                 <th data-sortable="true" data-field="perms">权限</th>
@@ -29,7 +32,7 @@
 </div>
 <script>
     $("#realTime_Table").bootstrapTable({
-        toolbar:'#toolbar',
+        toolbar: '#toolbar',
         search: false,
         pagination: true,
         pageSize: 15,
@@ -43,4 +46,11 @@
             alert("click:" + row.id)
         }
     });
+    $("#btn-toast").on("click", function () {
+        // alert("sdf")
+        // $("#ts-toast").toast("show",)
+
+        layer.msg("保存成功", {time: 3000, icon: 5, shift: 6}, function () {
+        })
+    })
 </script>

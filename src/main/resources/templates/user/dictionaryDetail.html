@@ -1,33 +1,54 @@
-<!-- Modal -->
-<!--<div class="modal fade" id="dictionaryDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
-<!--    <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--        <div class="modal-content">-->
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" th:value="${dictionary.id}">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" th:value="${dictionary.caption}">
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="modal-header bg-primary">
+    <h5 class="modal-title">修改字典</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="modify-dict-form">
+        <div class="form-group">
+            <label for="add-dict-input-id">编号</label>
+            <input type="text" class="form-control" id="add-dict-input-id"
+                   name="id" placeholder="请输入编号" th:value="${dictionary.id}">
+        </div>
+        <div class="form-group">
+            <label for="add-dict-input-caption">标题</label>
+            <input type="text" class="form-control" id="add-dict-input-caption"
+                   name="caption" placeholder="请输入标题" th:value="${dictionary.caption}">
+        </div>
+        <div class="form-group">
+            <label for="add-dict-input-category">分类</label>
+            <input type="text" class="form-control" id="add-dict-input-category"
+                   name="category" placeholder="请输入具体的分类" th:value="${dictionary.category}">
+        </div>
+        <div class="form-group">
+            <label for="add-dict-input-value">数值</label>
+            <input type="text" class="form-control" id="add-dict-input-value"
+                   name="value" placeholder="请输入数值" th:value="${dictionary.value}">
+        </div>
+        <div class="form-group">
+            <label for="add-dict-input-description">简介</label>
+            <input type="text" class="form-control" id="add-dict-input-description"
+                   name="description" placeholder="请描述一下作用" th:value="${dictionary.description}">
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" id="modify-dict-btn-save">保存</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+</div>
+
+<script>
+    $(function () {
+        $("#modify-dict-btn-save").on('click', function () {
+            FormCore.postAjax("/dictionary/save", $("#modify-dict-form").serialize(), function (data) {
+                if (data.status == 200) {
+                    $("#modify-dict-modal").modal("hide");
+                    layer.msg(data.msg);
+                } else {
+                    layer.msg(data.msg);
+                }
+            })
+        });
+    });
+</script>

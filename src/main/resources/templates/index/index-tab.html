@@ -15,7 +15,7 @@
     <link rel="stylesheet" th:href="@{/libs/adminLTE/css/adminlte.min.css}">
     <link rel="stylesheet" th:href="@{/libs/bootstrap-table/bootstrap-table.css}">
     <link rel="stylesheet" th:href="@{/css/core-tab.css}">
- </head>
+</head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
@@ -169,13 +169,17 @@
     <div class="content-wrapper">
         <div class="container-fluid">
             <ul class="nav nav-pills" id="tabs" role="tablist">
-                <li class="nav-item border" role="presentation" ><a href="#content_home" class="nav-link active" id="home"
-                                                             data-toggle="tab"><i class="fa fa-home mr-1 "></i>首页 </a>
+                <li class="nav-item border" role="presentation"><a href="#content_home" class="nav-link active"
+                                                                   id="home"
+                                                                   data-toggle="tab"><i class="fa fa-home mr-1 "></i>首页
+                </a>
                 </li>
             </ul>
 
             <div class="tab-content" id="content">
-                <div class="tab-pane active" id="content_home">home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home home home home home home </div>
+                <div class="tab-pane active" id="content_home">home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home<br>home
+                    home home home home home
+                </div>
             </div>
         </div>
     </div>
@@ -203,6 +207,19 @@
     </footer>
 </div>
 <!-- ./wrapper -->
+<div class="toast" style="position: absolute;top:100px;right: 0;" role="alert" id="ts-toast" data-delay="5000"
+     aria-atomic="true" aria-live="polite" width="200px;">
+    <div class="toast-header">
+        <strong class="mr-auto">提示信息</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body">
+        <h5>保存成功！</h5>
+    </div>
+</div>
+
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
@@ -220,7 +237,11 @@
 <script th:src="@{/js/tabCore.js}"></script>
 <!-- App from -->
 <script th:src="@{/js/formCore.js}"></script>
+<!--  App Tools-->
+<script th:src="@{/js/utils.js}"></script>
 <!-- App Setup -->
 <script th:src="@{/js/init.js}"></script>
+<!-- 显示提示-->
+<script th:src="@{/libs/layer/layer.js}"></script>
 </body>
 </html>

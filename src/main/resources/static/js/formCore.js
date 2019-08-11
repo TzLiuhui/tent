@@ -80,8 +80,41 @@ var FormCore = (function () {
             onLoadSuccess: tableOptions.onLoadSuccess
         });
     };
+
+    /*刷新表格 ：flag-是否跳转到当前页。默认首页*/
+    formCore.refreshTable = function (id, flag) {
+        if (flag) {
+            $(id).bootstrapTable("refresh");
+        } else {
+            $(id).bootstrapTable("refresh", {"pageNumber": 1});
+        }
+    }
+    formCore.selectSingleData = function (id){
+        var selectContent = $(id).bootstrapTable('getSelections');
+        if(typeof(selectContent) == 'undefined' || selectContent == "") {
+            layer.msg("请先选择一条数据!");
+            return false;
+        }else if(selectContent.length > 1){
+            layer.msg("只能选择一条数据!");
+            return false;
+        }else{
+            var selectData = selectContent[0];
+            return selectData;
+        }
+    };
+
+    formCore.selectMutiData = function (id){
+        var checkedRows= $(id).bootstrapTable('getSelections');
+        if(checkedRows.length==0){
+            layer.msg("请先选择一条数据！");
+            return false;
+        }else{
+            return checkedRows;
+        }
+    };
+
     /*ajax请求*/
-    formCore.load = function (id, url, dataToPost, d, type, async) {
+    formCore.postAjax = function (url, dataToPost, d, type, async) {
         $.ajax({
             url: url,
             cache: false,

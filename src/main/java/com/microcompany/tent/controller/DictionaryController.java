@@ -2,6 +2,8 @@ package com.microcompany.tent.controller;
 
 import com.microcompany.tent.model.Dictionary;
 import com.microcompany.tent.service.IDictoryService;
+import com.microcompany.tent.util.ResultUtil;
+import com.microcompany.tent.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,15 +40,34 @@ public class DictionaryController {
         return "/user/dictionary";
     }
 
-    @RequestMapping("/detail")
-    private String dictionaryDetail() {
-        return "/user/dictionaryDetail";
-    }
-
-    @RequestMapping("/getOne")
+    @RequestMapping("/getById")
     private String getOne(Model model, String id) {
         Dictionary dict = dictoryService.getById(id);
         model.addAttribute("dictionary", dict);
         return "/user/dictionaryDetail";
+    }
+    @RequestMapping("/save")
+    @ResponseBody
+    private ResultVo save(Dictionary dictionary) {
+        boolean cnt= dictoryService.saveOrUpdate(dictionary);
+        if (cnt) {
+            return ResultUtil.success("保存用户成功！");
+        } else {
+            return ResultUtil.error("保存用户失败");
+        }
+    }
+
+    /**批量删除用户*/
+    @GetMapping("/batch/delete")
+    @ResponseBody
+    public ResultVo batchDeleteDict(String dictIdStr) {
+        String[] dictIds = dictIdStr.split(",");
+        List<String> dictIdsList = Arrays.asList(dictIds);
+        boolean cnt = dictoryService.removeByIds(dictIdsList);
+        if (cnt) {
+            return ResultUtil.success("删除用户成功");
+        } else {
+            return ResultUtil.error("删除用户失败");
+        }
     }
 }
