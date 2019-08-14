@@ -22,6 +22,10 @@ spring:
     # 配置获取连接等待超时的时间
     maxWait: 60000
     filters: stat,wall,slf4j
+    #解决springboot 返回时间格式不对问题
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+#    time-zone: GMT+8
 
   thymeleaf:
     cache: false
