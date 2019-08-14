@@ -2,14 +2,14 @@ var FormCore = (function () {
     var formCore = {};
     var tableOpts = {
         id: "",
-        url: "",
+        url:"",
         columns: [],
         uniqueId: "id",//每一行的唯一标识，一般为主键列
         method: "post",//请求方式（*）
         undefinedText: "-", /*为undefiend时显示的字*/
         striped: true, //是否显示行间隔色
-        // queryParams: queryInitParams,
-        // responseHandler: responseHandler,
+        queryParams: queryInitParams,
+        responseHandler: responseHandler,
         toolbar: '',        //工具按钮用哪个容器
         pageNumber: 1,
         pageSize: 10,
@@ -22,7 +22,7 @@ var FormCore = (function () {
         sortOrder: "asc", //排序方式
         sortName: "", //排序字段
         queryParamsType: "limit",
-        sidePagination: "client", //分页方式：client客户端分页，server服务端分页（*）
+        sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
         showColumns: true, //是否显示所有的列
         showRefresh: true, //是否显示刷新按钮
         minimumCountColumns: 2, //最少允许的列数
@@ -34,7 +34,7 @@ var FormCore = (function () {
         showExport: true, //是否显示导出
         exportDataType: "all", //basic', 'all', 'selected'.
         escape: true,//html转意
-        // onLoadSuccess: tableLoadSuccess
+        onLoadSuccess: tableLoadSuccess
     };
 
     /*bootstrap-table表格*/
@@ -54,7 +54,7 @@ var FormCore = (function () {
             sortOrder: tableOptions.sortOrder, //排序方式
             sortName: tableOptions.sortName, //排序方式
             // search: true,             //是否使用客户端搜索
-            // queryParams: tableOptions.queryParams,//传递参数（*）
+            queryParams: tableOptions.queryParams,//传递参数（*）
             responseHandler: tableOptions.responseHandler,
             queryParamsType: tableOptions.queryParamsType,
             sidePagination: tableOptions.sidePagination, //分页方式：client客户端分页，server服务端分页（*）
@@ -135,7 +135,46 @@ var FormCore = (function () {
                 }
             }
         });
+        //date类型到字符串
+        formCore.formatterDateTime = function (date) {
+            var datetime = date.getFullYear()
+                + "-"// "年"
+                + ((date.getMonth() + 1) >= 10 ? (date.getMonth() + 1)
+                    : "0" + (date.getMonth() + 1))
+                + "-"// "月"
+                + (date.getDate() < 10 ? "0" + date.getDate() : date
+                    .getDate())
+                + " "
+                + (date.getHours() < 10 ? "0" + date.getHours() : date
+                    .getHours())
+                + ":"
+                + (date.getMinutes() < 10 ? "0" + date.getMinutes()
+                    : date.getMinutes())
+                + ":"
+                + (date.getSeconds() < 10 ? "0" + date.getSeconds()
+                    : date.getSeconds());
+            return datetime;
+        };
+
+        //long类型转时间字符串
+        formCore.longMsTimeConvertToDateTime = function (time) {
+            var myDate = new Date(time);
+            return this.formatterDateTime(myDate);
+        }
     };
+    function responseHandler(data) {
+        return data;
+    }
+
+    function tableLoadSuccess(data) {
+    }
+    function queryInitParams(params) {
+        var temp = { //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
+            limit: params.limit, //页面大小
+            offset: params.offset //页码
+        };
+        return temp;
+    }
     return formCore;
 })
 (FormCore, window);

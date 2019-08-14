@@ -42,14 +42,18 @@ public class DictionaryController {
 
     @RequestMapping("/getById")
     private String getOne(Model model, String id) {
-        Dictionary dict = dictoryService.getById(id);
+        Dictionary dict = null;
+        if (!"0".equals(id)) {
+            dict = dictoryService.getById(id);
+        }
         model.addAttribute("dictionary", dict);
         return "/user/dictionaryDetail";
     }
+
     @RequestMapping("/save")
     @ResponseBody
     private ResultVo save(Dictionary dictionary) {
-        boolean cnt= dictoryService.saveOrUpdate(dictionary);
+        boolean cnt = dictoryService.saveOrUpdate(dictionary);
         if (cnt) {
             return ResultUtil.success("保存用户成功！");
         } else {
@@ -57,7 +61,9 @@ public class DictionaryController {
         }
     }
 
-    /**批量删除用户*/
+    /**
+     * 批量删除用户
+     */
     @GetMapping("/batch/delete")
     @ResponseBody
     public ResultVo batchDeleteDict(String dictIdStr) {

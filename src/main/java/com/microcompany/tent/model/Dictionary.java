@@ -1,5 +1,6 @@
 package com.microcompany.tent.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -9,8 +10,9 @@ import lombok.Data;
  * @since 1.0.0
  */
 @Data
-@TableName("frame_dictionary")
+@TableName("sys_dictionary")
 public class Dictionary {
+    @TableId
     private String id;
     private String caption;
     private String category;

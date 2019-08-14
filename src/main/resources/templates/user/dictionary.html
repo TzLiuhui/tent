@@ -2,8 +2,7 @@
     <div class="container-fluid">
 
         <div id="dict-toolbar">
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#add-dict-modal">
+            <button type="button" class="btn btn-primary" id="dict-btn-add">
                 <i class="fas fa-plus-circle mr-1" aria-hidden="true"></i>新增
             </button>
             <button id="dict-btn-batch-delete" type="button" class="btn btn-danger">
@@ -14,58 +13,10 @@
             <thead class="table-success">
         </table>
 
-        <!--        <div id="openDictionaryDetail">-->
-        <div class="modal fade" id="add-dict-modal" tabindex="-1" role="dialog"
+        <div class="modal fade" id="edit-dict-modal" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <h5 class="modal-title">新增字典</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="add-dict-form">
-                            <div class="form-group">
-                                <label for="add-dict-input-id">编号</label>
-                                <input type="text" class="form-control" id="add-dict-input-id"
-                                       name="id" placeholder="请输入编号">
-                            </div>
-                            <div class="form-group">
-                                <label for="add-dict-input-caption">标题</label>
-                                <input type="text" class="form-control" id="add-dict-input-caption"
-                                       name="caption" placeholder="请输入标题">
-                            </div>
-                            <div class="form-group">
-                                <label for="add-dict-input-category">分类</label>
-                                <input type="text" class="form-control" id="add-dict-input-category"
-                                       name="category" placeholder="请输入具体的分类">
-                            </div>
-                            <div class="form-group">
-                                <label for="add-dict-input-value">数值</label>
-                                <input type="text" class="form-control" id="add-dict-input-value"
-                                       name="value" placeholder="请输入数值">
-                            </div>
-                            <div class="form-group">
-                                <label for="add-dict-input-description">简介</label>
-                                <input type="text" class="form-control" id="add-dict-input-description"
-                                       name="description" placeholder="请描述一下作用">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="add-dict-btn-save">保存</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="modify-dict-modal" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content" id="open-modify-dict-modal">
+                <div class="modal-content" id="open-edit-dict-modal">
                 </div>
             </div>
         </div>
@@ -101,25 +52,23 @@
         toolbar: '#dict-toolbar',
         url: "/dictionary/list",
         columns: columns,
+        sidePagination: "client",
         method: 'get'
     };
     FormCore.initTable(optis);
 
     $("#dict-list-table").on("dbl-click-row.bs.table", function (e, row) {
-        $("#open-modify-dict-modal").load("/dictionary/getById?id=" + row.id);
-        $("#modify-dict-modal").modal();
+        $("#open-edit-dict-modal").load("/dictionary/getById?id=" + row.id, function () {
+            $("#edit-dict-modal").modal();
+        });
     });
 
-    $("#add-dict-btn-save").on('click', function () {
-        FormCore.postAjax("/dictionary/save", $("#add-dict-form").serialize(), function (data) {
-            if (data.status == 200) {
-                $("#add-dict-modal").modal("hide");
-                FormCore.refreshTable("#dict-list-table");
-                Utils.showMessage(data.msg);
-            } else {
-                Utils.showMessage(data.msg);
-            }
-        })
+    $("#dict-btn-add").on("click", function () {
+        $("#open-edit-dict-modal").load("/dictionary/getById?id=0", function () {
+            $("#edit-dict-modal").modal();
+            $("#edit-dict-input-id").attr("readOnly", false);
+            $("#dict-caption").text("新增字典");
+        });
     });
 
     /*批量删除*/

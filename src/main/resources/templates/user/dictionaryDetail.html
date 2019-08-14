@@ -1,49 +1,49 @@
 <div class="modal-header bg-primary">
-    <h5 class="modal-title">修改字典</h5>
+    <h6 class="modal-title" id="dict-caption">修改字典</h6>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <form id="modify-dict-form">
+    <form id="edit-dict-form">
         <div class="form-group">
-            <label for="add-dict-input-id">编号</label>
-            <input type="text" class="form-control" id="add-dict-input-id"
-                   name="id" placeholder="请输入编号" th:value="${dictionary.id}">
+            <label for="edit-dict-input-id">编号</label>
+            <input type="text" class="form-control" readonly id="edit-dict-input-id"
+                   name="id" placeholder="请输入编号" th:value="${dictionary?.id}">
         </div>
         <div class="form-group">
-            <label for="add-dict-input-caption">标题</label>
-            <input type="text" class="form-control" id="add-dict-input-caption"
-                   name="caption" placeholder="请输入标题" th:value="${dictionary.caption}">
+            <label for="modify-dict-input-caption">标题</label>
+            <input type="text" class="form-control" id="modify-dict-input-caption"
+                   name="caption" placeholder="请输入标题" th:value="${dictionary?.caption}">
         </div>
         <div class="form-group">
-            <label for="add-dict-input-category">分类</label>
-            <input type="text" class="form-control" id="add-dict-input-category"
-                   name="category" placeholder="请输入具体的分类" th:value="${dictionary.category}">
+            <label for="modify-dict-input-category">分类</label>
+            <input type="text" class="form-control" id="modify-dict-input-category"
+                   name="category" placeholder="请输入具体的分类" th:value="${dictionary?.category}">
         </div>
         <div class="form-group">
-            <label for="add-dict-input-value">数值</label>
-            <input type="text" class="form-control" id="add-dict-input-value"
-                   name="value" placeholder="请输入数值" th:value="${dictionary.value}">
+            <label for="modify-dict-input-value">数值</label>
+            <input type="text" class="form-control" id="modify-dict-input-value"
+                   name="value" placeholder="请输入数值" th:value="${dictionary?.value}">
         </div>
         <div class="form-group">
-            <label for="add-dict-input-description">简介</label>
-            <input type="text" class="form-control" id="add-dict-input-description"
-                   name="description" placeholder="请描述一下作用" th:value="${dictionary.description}">
+            <label for="modify-dict-input-description">简介</label>
+            <input type="text" class="form-control" id="modify-dict-input-description"
+                   name="description" placeholder="请描述一下作用" th:value="${dictionary?.description}">
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" id="modify-dict-btn-save">保存</button>
+    <button type="button" class="btn btn-primary" id="edit-dict-btn-save">保存</button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
 </div>
 
 <script>
     $(function () {
-        $("#modify-dict-btn-save").on('click', function () {
-            FormCore.postAjax("/dictionary/save", $("#modify-dict-form").serialize(), function (data) {
+        $("#edit-dict-btn-save").on('click', function () {
+            FormCore.postAjax("/dictionary/save", $("#edit-dict-form").serialize(), function (data) {
                 if (data.status == 200) {
-                    $("#modify-dict-modal").modal("hide");
+                    $("#edit-dict-modal").modal("hide");
                     FormCore.refreshTable('#dict-list-table');
                     Utils.showMessage(data.msg);
                 } else {
