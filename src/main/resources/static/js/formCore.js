@@ -2,7 +2,7 @@ var FormCore = (function () {
     var formCore = {};
     var tableOpts = {
         id: "",
-        url:"",
+        url: "",
         columns: [],
         uniqueId: "id",//每一行的唯一标识，一般为主键列
         method: "post",//请求方式（*）
@@ -13,7 +13,7 @@ var FormCore = (function () {
         toolbar: '',        //工具按钮用哪个容器
         pageNumber: 1,
         pageSize: 10,
-        pageList: [10, 15, 20],
+        pageList: [5, 10, 20],
         contentType: "application/x-www-form-urlencoded",//用post请求，这个是必须条件，必须加上，get可以不用，亲测
         dataType: "json",
         cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -74,7 +74,7 @@ var FormCore = (function () {
             showExport: tableOptions.showExport, //是否显示导出
             exportDataType: tableOptions.exportDataType, //basic', 'all', 'selected'.
             escape: tableOptions.escape,//html转意
-            //            align: "center",
+            align: "center",
             columns: tableOptions.columns,//表格列
             onLoadSuccess: tableOptions.onLoadSuccess
         });
@@ -162,12 +162,14 @@ var FormCore = (function () {
             return this.formatterDateTime(myDate);
         }
     };
+
     function responseHandler(data) {
         return data;
     }
 
     function tableLoadSuccess(data) {
     }
+
     function queryInitParams(params) {
         var temp = { //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
             limit: params.limit, //页面大小
@@ -175,6 +177,7 @@ var FormCore = (function () {
         };
         return temp;
     }
+
     return formCore;
 })
 (FormCore, window);
