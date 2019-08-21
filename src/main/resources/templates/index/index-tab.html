@@ -17,7 +17,7 @@
     <link rel="stylesheet" th:href="@{/css/core-tab.css}">
     <link rel="stylesheet" th:href="@{/libs/layer/theme/default/layer.css}">
     <link rel="stylesheet" th:href="@{/libs/daterangepicker/daterangepicker-bs3.css}">
-    <link rel="stylesheet" th:href="@{/libs/datepicker/datepicker3.css}">
+    <link rel="stylesheet" th:href="@{/libs/treegrid/jquery.treegrid.css}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -154,7 +154,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#tree" class="nav-link" id="treegrid">
                                     <i class="far fa-circle nav-icon ml-3"></i>
                                     <p>修改权限</p>
                                 </a>
@@ -236,15 +236,17 @@
 <!--bootstrap table-->
 <script th:src="@{/libs/bootstrap-table/bootstrap-table.js}"></script>
 <script th:src="@{/libs/bootstrap-table/locale/bootstrap-table-zh-CN.js}"></script>
-<!-- datepicker-->
-<script th:src="@{/libs/daterangepicker/daterangepicker.js}"></script>
-<script th:src="@{/libs/datepicker/locales/bootstrap-datepicker.zh-CN.js}"></script>
+<script th:src="@{/libs/treegrid/jquery.treegrid.min.js}"></script>
+<script th:src="@{/libs/bootstrap-table/extensions/treegrid/bootstrap-table-treegrid.js}"></script>
+<script th:src="@{/libs/bootstrap-table/extensions/export/bootstrap-table-export.js}"></script>
+
 <!-- daterangepicker-->
-<script th:src="@{/libs/datepicker/bootstrap-datepicker.js}"></script>
+<script th:src="@{/libs/daterangepicker/moment.js}"></script>
+<script th:src="@{/libs/daterangepicker/daterangepicker.js}"></script>
 
 <!-- App tab -->
 <script th:src="@{/js/tabCore.js}"></script>
-<!-- App from -->
+<!-- App form -->
 <script th:src="@{/js/formCore.js}"></script>
 <!--  App Tools-->
 <script th:src="@{/js/utils.js}"></script>

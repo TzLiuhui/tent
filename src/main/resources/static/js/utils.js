@@ -1,5 +1,4 @@
 var Utils = (function () {
-
     var utils={};
     /*询问框*/
     utils.confirm = function (content, fun) {

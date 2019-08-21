@@ -20,5 +20,9 @@ public class userController {
     public String userper() {
         return "/user/user";
     }
+    @RequestMapping(value = {"/tree"})
+    public String tree() {
+        return "/index/user";
+    }
 
 }
