@@ -1,0 +1,121 @@
+<div class="modal-header bg-primary">
+    <h6 class="modal-title" id="dbpage-caption">修改字典</h6>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="edit-dbpage-form">
+        <div class="form-group">
+            <label for="edit-dbpage-input-id">编号</label>
+            <input type="text" class="form-control" readonly id="edit-dbpage-input-id"
+                   name="id" placeholder="请输入编号" th:value="${dbPage?.id}">
+        </div>
+        <div class="form-group">
+            <label for="edit-dbpage-input-dbName">数据库名称</label>
+            <input type="text" class="form-control" id="edit-dbpage-input-dbName"
+                   name="dbName" placeholder="请输入标题" th:value="${dbPage?.dbName}">
+        </div>
+        <div class="form-group">
+            <label for="edit-dbpage-input-tabName">表名</label>
+            <input type="text" class="form-control" id="edit-dbpage-input-tabName"
+                   name="tabName" placeholder="请输入具体的分类" th:value="${dbPage?.tabName}">
+        </div>
+        <div class="form-group">
+            <label for="edit-dbpage-input-lastUpdate">最后修改时间</label>
+            <input type="text" class="form-control dateCss" id="edit-dbpage-input-lastUpdate"
+                   placeholder="请输入数值">
+        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="edit-dbpage-input-lastUpdatebak">最后修改时间</label>-->
+            <input type="hidden" id="edit-dbpage-input-lastUpdatebak"
+                   name="lastUpdate"  th:value="${dbPage?.lastUpdate}">
+<!--        </div>-->
+        <div class="form-group">
+            <label for="edit-dbpage-input-createTime">创建时间</label>
+            <input type="text" class="form-control dateCss" id="edit-dbpage-input-createTime"
+                   name="createTime" placeholder="请输入数值"  th:value="${dbPage?.createTime}">
+        </div>
+        <div class="form-group">
+            <label for="edit-dbpage-input-rmb">价值</label>
+            <input type="text" class="form-control" id="edit-dbpage-input-rmb"
+                   name="rmb" placeholder="请描述一下作用" th:value="${dbPage?.rmb}">
+        </div>
+        <div class="form-group">
+            <label for="edit-dbpage-input-sumSize">合计</label>
+            <input type="text" class="form-control" id="edit-dbpage-input-sumSize"
+                   name="sumSize" placeholder="请描述一下作用" th:value="${dbPage?.sumSize}">
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" id="edit-dbpage-btn-save">保存</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+</div>
+
+<script>
+    $(function () {
+        $("#edit-dbpage-btn-save").on('click', function () {
+            FormCore.postAjax("/dbpage/save", $("#edit-dbpage-form").serialize(), function (data) {
+                if (data.status == 200) {
+                    $("#edit-dbpage-modal").modal("hide");
+                    FormCore.refreshTable('#dbpage-list-table');
+                    Utils.showMessage(data.msg);
+                } else {
+                    Utils.showMessage(data.msg);
+                }
+            })
+        });
+    });
+
+    $(function () {
+        // defaultStartDate = getPageStartDate();
+
+        $(".dateCss").daterangepicker({
+            autoApply: true,
+            singleDatePicker: true,//设置为单个的datepicker，而不是有区间的datepicker 默认false
+            showDropdowns: true,//当设置值为true的时候，允许年份和月份通过下拉框的形式选择 默认false
+            autoUpdateInput: false,//1.当设置为false的时候,不给与默认值(当前时间)2.选择时间时,失去鼠标焦点,不会给与默认值 默认true
+            timePickerIncrement: 1, //时间的增量，单位为分钟
+            timePicker24Hour: true,//设置小时为24小时制 默认false
+            timePicker: true,//可选中时分 默认false
+            dateLimit: {
+                days: 30
+            }, //起止时间的最大间隔
+            format: "YYYY-MM-DD HH:mm:ss",
+            separator: " 至 ",
+            ranges : {
+                //'最近1小时': [moment().subtract('hours',1), moment()],
+                '今日': [moment().startOf('day'), moment()],
+                '昨日': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day')],
+                '最近7日': [moment().subtract('days', 6), moment()],
+                '最近30日': [moment().subtract('days', 29), moment()]
+            },
+            locale: {
+                applyLabel: "确定",
+                cancelLabel: "取消",
+                fromLabel: "开始",
+                toLabel: "结束",
+                firstDay: 1,
+                daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+                monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+            }
+        });
+        console.log($("#edit-dbpage-input-createTime").val());
+        console.log(FormCore.longMsTimeConvertToDateTime($("#edit-dbpage-input-createTime").val()));
+        // console.log(moment(1555913666000).format('YYYY-MM-DD HH:mm:ss'));
+        // console.log(moment().format('X'));
+        // $("#edit-dbpage-input-lastUpdate").data('daterangepicker').setStartDate(FormCore.longMsTimeConvertToDateTime(parseInt($("#edit-dbpage-input-lastUpdatebak").val())));
+         // 当单一一时间是显示的结束时间
+        $("#edit-dbpage-input-createTime").data('daterangepicker').setEndDate(moment($("#edit-dbpage-input-createTime").val()));
+        $("#edit-dbpage-input-lastUpdate").data('daterangepicker').setEndDate(FormCore.longMsTimeConvertToDateTime(parseInt($("#edit-dbpage-input-lastUpdatebak").val())));
+        $("#edit-dbpage-input-lastUpdate").data('daterangepicker').setStartDate(FormCore.longMsTimeConvertToDateTime(parseInt($("#edit-dbpage-input-lastUpdatebak").val())));
+        $('#edit-dbpage-input-lastUpdate').on('apply.daterangepicker', function (ev, picker) {
+            console.log(picker.startDate.valueOf());
+            $("#edit-dbpage-input-lastUpdatebak").val(picker.endDate.valueOf());
+            $("#edit-dbpage-input-lastUpdatebak").val(picker.startDate.valueOf());
+            // console.log(picker.endDate.format('YYYY-MM-DD'));
+        });
+    });
+
+</script>
